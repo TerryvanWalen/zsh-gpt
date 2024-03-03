@@ -2,7 +2,7 @@
 
 Simple ZSH plugin to allow querying ChatGPT from the command line. Forked from Muhsin Fatih Yorulmaz (https://github.com/antonjs/zsh-gpt).
 
-```
+```zsh
 zsh-gpt ❯ gpt - c Write a python hello world to the home directory
 echo 'print("Hello, World!")' > ~/hello_world.py
 
@@ -39,11 +39,11 @@ Add TerryvanWalen/zsh-gpt using whatever format the plugin manager expects:
 
 #### For Oh My Zsh
 1. Clone this repository into `$ZSH_CUSTOM/plugins` (by default `~/.oh-my-zsh/custom/plugins`)
-```
+```zsh
 git clone https://github.com/TerryvanWalen/zsh-gpt ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-gpt
 ```
 2. Add the plugin to the list of plugins for Oh My Zsh to load (inside `~/.zshrc`):
-```
+```zsh
 plugins=( 
     # other plugins seperated by spaces or newlines (not commas)
     zsh-gpt
