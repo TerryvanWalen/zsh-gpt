@@ -1,58 +1,76 @@
 # ZSH-GPT
 
-Simple ZSH plugin to allow querying ChatGPT from the command line. Inspired by and based on (1000x Engineer)[https://kadekillary.work/posts/1000x-eng/] by Kade Killary. See that post
-for more great examples.
+Simple ZSH plugin to allow querying ChatGPT from the command line. Forked from Muhsin Fatih Yorulmaz (https://github.com/antonjs/zsh-gpt).
 
 ```
-❯ g hello world
-Hello there! How can I assist you today?
+zsh-gpt ❯ gpt - c Write a python hello world to the home directory
+echo 'print("Hello, World!")' > ~/hello_world.py
 
-❯ g how do I change the date on linux
-To change the date on Linux, you can use the "date" command with the appropriate parameters.
+zsh-gpt ❯ gpt hi
+How can I assist you today?
 
-For example, to set the date to January 1, 2025 at 12:00 AM, you could use the following command:
-sudo date -s "01 JAN 2025 00:00:00"
+zsh-gpt ❯ gpt
+Type 'exit' to quit and 'clear' to clear the history
+> How many feet are in one meter?
+3.28084 feet
+> How do I sync files from one folder to another?
+rsync -avz /path/to/source/ /path/to/destination/
+> Compose an email to a colleague. It communicates that we are going to delay the launch date due to external dependencies.
+Subject: Update on Project Launch Date
 
-The "s" option specifies that you want to set the date and time, and the argument following it should be the date and time you want to set.
+Dear [Colleague's Name],
 
-You will need to run this command as root (using "sudo") in order to have the necessary permissions to change the system date.
+I hope this email finds you well. I wanted to update you on our project's timeline. Due to some external dependencies that are beyond our control, we've had to make the decision to delay the launch date. We are currently working closely with our partners to resolve these issues and will keep you informed on our progress and the new timeline.
 
-❯ g write a zsh command to extract the third field from a csv
-Assuming the csv is delimited by commas, you can use the `cut` command to extract the third field:
+Thank you for your understanding and cooperation.
 
-zsh
-cut -d',' -f3 <file.csv>
-
-This will print out the third field of each line in the csv file. If you want to save the output to a new file, you can use output redirection:
-
-zsh
-cut -d',' -f3 <file.csv> > newfile.txt
+Best regards,
+[Your Name]
 ```
 
 ## Install
 
-### Plugin Managers
-Add antonjs/zsh-gpt using whatever format the plugin manager expects:
-```
-zinit light antonjs/zsh-gpt
-antigen bundle antonjs/zsh-gpt
-antidote bundle antonjs/zsh-gpt
-```
-
+### Set OPENAI_API_KEY
 Set OPENAI_API_KEY in `.zshrc` or otherwise:
 `OPENAI_API_KEY = [key]`
 
+### Plugin Managers
+Add TerryvanWalen/zsh-gpt using whatever format the plugin manager expects:
+
+#### For Oh My Zsh
+1. Clone this repository into `$ZSH_CUSTOM/plugins` (by default `~/.oh-my-zsh/custom/plugins`)
+```
+git clone https://github.com/TerryvanWalen/zsh-gpt ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-gpt
+```
+2. Add the plugin to the list of plugins for Oh My Zsh to load (inside `~/.zshrc`):
+```
+plugins=( 
+    # other plugins seperated by spaces or newlines (not commas)
+    zsh-gpt
+)
+```
+
 ### Manual
-1. Clone this repository: `git clone https://github.com/antonjs/zsh-gpt ~/.zsh/zsh-gpt`
-2. Source the plugin in your `.zshrc`: `source ~/.zsh/zsh-gpt/zsh-gpt.plugin/zsh`
+1. Clone this repository: `git clone TerryvanWalen/zsh-gpt ~/.zsh/zsh-gpt`
+2. Source the plugin in your `.zshrc`: `source ~/.zsh/zsh-gpt/zsh-gpt.plugin.zsh`
 3. Set OPENAI_API_KEY in `.zshrc` or otherwise:
   `OPENAI_API_KEY = [key]`
 4. Start a new terminal session
 
 ## Usage
-+ Type `g [query]` where `query` is your question.
-+ Use quotes, or not, but be aware of symbols like quotes:
-  `g What is the graphical file browser on Ubuntu`
-  `g "What's Ubuntu's graphical file browser called?`
-+ Provide data using subcommands, be careful of quotes:
-  `g "Calculate the average PointsPerGame by Position from the following:" $(cat nba.csv | sed 's/"//g')`
++ For shell or code related questions. Type `gpt -c [query]` where `[query]` is your question.
++ For other questions. Type `gpt [query]` where `[query]` is your question.
++ For a chat like experience. Type `gpt`.
+
+
+# TODOS
+- [ ] Provide better options
+  - [ ] Provide/store system message
+  - [ ] Provide an option for gpt to give concise/explantory answers
+  - [ ] Limit the conversation history provided to gpt to the last `n` questions/answers
+  - [ ] Provide the option to switch between models
+  - [ ] Provide the OPENAI_API_KEY as an argument
+- [ ] Colorize output (especially in chat mode)
+- [ ] Save the OPENAI_API_KEY more securely
+- [ ] Readme
+  - [ ] How to install for other plugin managers
