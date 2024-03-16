@@ -70,6 +70,7 @@ plugins=(
   - [ ] Limit the conversation history provided to gpt to the last `n` questions/answers
   - [ ] Provide the option to switch between models
   - [ ] Provide the OPENAI_API_KEY as an argument
+- [ ] Allow input of qoutes ("")
 - [ ] Colorize output (especially in chat mode)
 - [ ] Save the OPENAI_API_KEY more securely
 - [ ] Readme
