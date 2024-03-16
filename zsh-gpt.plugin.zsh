@@ -54,7 +54,8 @@ _chat_gpt() {
         fi
         local prompt="$(_create_prompt $user_input)"
         # If not valid string according to jq. Then show message and continue to next loop
-        echo "$prompt" | jq > /dev/null && conversation_history+="$prompt"
+        echo "$prompt" | jq > /dev/null || continue
+        conversation_history+="$prompt"
 
         local messages=${(j|, |)conversation_history}
         reply="$(_curl_gpt "$system" "$messages")"
