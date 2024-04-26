@@ -18,7 +18,7 @@ _curl_gpt() {
         -H "Content-Type: application/json" \
         -H "Authorization: Bearer $OPENAI_API_KEY" \
         -d '{
-            "model": "gpt-4-turbo-preview",
+            "model": "gpt-4-turbo",
             "messages": [{"role": "system", "content": "'"$system"'"}, '"$messages"']
     }' | jq '.choices[0].message // .error'
 }
